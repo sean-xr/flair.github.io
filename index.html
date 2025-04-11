@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="DESCRIPTION META TAG">
-  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
-  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <meta name="description" content="FLAIR is a vision-language model that learns fine-grained, text-conditioned image representations.">
+  <meta property="og:title" content="FLAIR: Fine-grained Language-informed Image Representations"/>
+  <meta property="og:description" content="A CVPR 2025 paper introducing a CLIP-style model that excels at fine-grained image-text alignment using text-conditioned attention pooling."/>
+  <meta property="og:url" content="https://explainableml.github.io/flair/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image" content="static/image/main_method.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
 
 
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
-  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <meta name="twitter:title" content="FLAIR: Fine-grained Language-informed Image Representations">
+  <meta name="twitter:description" content="A CVPR 2025 paper introducing a CLIP-style model that excels at fine-grained image-text alignment using text-conditioned attention pooling.">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:image" content="static/images/main_method.png">
   <meta name="twitter:card" content="summary_large_image">
   <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="keywords" content="FLAIR, CLIP, Vision-Language Model, CVPR 2025">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -146,7 +146,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            CLIP has shown impressive results in aligning images and texts at scale. However, its ability to capture detailed visual features remains limited because CLIP matches images and texts at a global level. To address this issue, we propose FLAIR, Fine-grained Language-informed Image Representations, an approach that utilizes long and detailed image descriptions to learn localized image embeddings. By sampling diverse sub-captions that describe fine-grained details about an image, we train our vision-language model to produce not only global embeddings but also text-specific image representations. Our model introduces text-conditioned attention pooling on top of local image tokens to produce fine-grained image representations that excel at retrieving detailed image content. We achieve state-of-the-art performance on both, existing multimodal retrieval benchmarks, as well as, our newly introduced fine-grained retrieval task which evaluates vision-language models’ ability to retrieve partial image content. Furthermore, our experiments demonstrate the effectiveness of FLAIR trained on 30M image-text pairs in capturing fine-grained visual information, including zero-shot semantic segmentation, outperforming models trained on billions of pairs.
+            CLIP has shown impressive results in aligning images and texts at scale. However, its ability to capture detailed visual features remains limited because CLIP matches images and texts at a global level. To address this issue, we propose <strong>FLAIR</strong>, <strong>F</strong>ine-grained <strong>LA</strong>nguage-informed <strong>I</strong>mage <strong>R</strong>epresentations, an approach that utilizes long and detailed image descriptions to learn localized image embeddings. By sampling diverse sub-captions that describe fine-grained details about an image, we train our vision-language model to produce not only global embeddings but also text-specific image representations. Our model introduces text-conditioned attention pooling on top of local image tokens to produce fine-grained image representations that excel at retrieving detailed image content. We achieve state-of-the-art performance on both, existing multimodal retrieval benchmarks, as well as, our newly introduced fine-grained retrieval task which evaluates vision-language models’ ability to retrieve partial image content. Furthermore, our experiments demonstrate the effectiveness of FLAIR trained on 30M image-text pairs in capturing fine-grained visual information, including zero-shot semantic segmentation, outperforming models trained on billions of pairs.
           </p>
         </div>
       </div>
@@ -159,14 +159,14 @@
 <section class="section">
   <div class="container is-max-desktop content">
     <h2 class="title is-3">Methodology</h2>
-    <p> FLAIR is a CLIP-like vision-language model, featuring text-conditioned attention pooling. Different from CLIP (directly using global image token) and SigLIP (using learnable global query to pool the local image tokens), FLAIR utilizes global text token as query to pool the local image tokens. On top of that, FLAIR also matches the global image token with the global text token.</p>
+    <p>Figure 1 compares FLAIR with prior approaches. FLAIR is a CLIP-style vision-language model that introduces text-conditioned attention pooling. Unlike CLIP, which directly uses a global image token, or SigLIP, which employs a learnable global query, FLAIR leverages global text tokens as queries to pool local image features. It further aligns the resulting global image token with its corresponding text.</p>
     
     <figure>
       <img src="static/images/method_comparison.png" alt="Descriptive alt text">
       <figcaption>Figure 1. Comparison with previous methods.</figcaption>
     </figure>
 
-    <p>In Fig.2 we see an overview of FLAIR's methodology. FLAIR uses datasets with synthetic captions generated by MLLMs. FLAIR samples diverse captions -- various combinations of sub-captions, serving for both multiple positive and negative captions for each image. FLAIR uses text-conditioned attention pooling to generate  fine-grained text-conditioned image representations for each sub-caption, then enforce the alignment via Text-conditioned Sigmoid Loss and the Multi-positive Sigmoid Loss.    </p>
+    <p>Figure 2 illustrates the architecture of FLAIR. It is trained on datasets with synthetic captions generated by MLLMs. By sampling diverse sub-captions per image, FLAIR creates multiple positive and negative pairs. Each sub-caption guides attention pooling over local image tokens to produce fine-grained, text-specific image embeddings. The model is optimized using a text-conditioned sigmoid loss and a multi-positive sigmoid loss.</p>
 
     <figure>
       <img src="static/images/main_method.png" alt="Descriptive alt text">
@@ -178,7 +178,7 @@
 <section class="section">
   <div class="container is-max-desktop content">
     <h2 class="title is-3">Quantitative Results</h2>
-    <p> We measure FLAIR's performance in zero-shot standard, fine-grained, long image-text retrieval, zero-shot semantic segmentation, zero-shot image classification.</p>
+    <p>FLAIR is evaluated on a range of tasks, including zero-shot standard, fine-grained, and long image-text retrieval, as well as zero-shot semantic segmentation and image classification. Trained on just 30M image-text pairs, FLAIR delivers strong performance across all three retrieval settings and in semantic segmentation, outperforming models trained on billion-scale datasets. For zero-shot image classification, it matches the performance of prior methods trained on similar-scale synthetic data, showing that fine-grained alignment does not come at the cost of global recognition ability.</p>
   </div>
 </section>
 
@@ -208,7 +208,10 @@
 <section class="section">
   <div class="container is-max-desktop content">
     <h2 class="title is-3">Qualitative Results</h2>
-    <p> Including attention map visualization and token-wise similarity.</p>
+    <p>
+      We visualize the attention maps from our text-conditioned attention pooling layer to illustrate how FLAIR localizes semantic regions in the image based on different captions. As shown below, FLAIR attends to both large and small objects (e.g., "truck" and "worker") and distinguishes between similar objects based on properties like color or position (e.g., different horses). 
+      We also demonstrate token-wise image-text similarities (between local image tokens and the global text token), showing that FLAIR produces fine-grained alignment, successfully highlighting relevant local regions for each caption. This highlights FLAIR's strong sensitivity to semantic details and its capacity for localized understanding.
+    </p>
   </div>
 </section>
 
